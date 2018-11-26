@@ -12,6 +12,23 @@ namespace PriceComparer.Api.Controllers
     [ApiController]
     public class SellerController : ControllerBase
     {
+        [HttpGet("{id}")]
+        public async Task<ActionResult<string>> Get(string id)
+        {
+            try
+            {
+                var sellerActor = ActorProxy.Create<ISellerActor>(new ActorId(id));
+                var seller = await sellerActor.GetState(CancellationToken.None);
+
+                return new JsonResult(seller);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         [HttpPost]
         public async Task Post([FromBody] Seller seller)
         {

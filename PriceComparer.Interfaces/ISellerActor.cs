@@ -8,6 +8,8 @@ namespace PriceComparer.Interfaces
     {
         Task AddOffer(Offer offer, CancellationToken cancellationToken);
 
+        Task<Seller> GetState(CancellationToken cancellationToken);
+
         Task AddSeller(Seller seller, CancellationToken cancellationToken);
 
         Task Mark(decimal value, CancellationToken cancellationToken);
