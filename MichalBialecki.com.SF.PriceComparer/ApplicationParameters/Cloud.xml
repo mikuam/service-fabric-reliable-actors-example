@@ -1,4 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="fabric:/MichalBialecki.com.SF.PriceComparer" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-  <Parameters />
+  <Parameters>
+    <Parameter Name="InstanceCount" Value="1" />
+    <Parameter Name="ASPNETCORE_ENVIRONMENT" Value="Development" />
+  </Parameters>
 </Application>

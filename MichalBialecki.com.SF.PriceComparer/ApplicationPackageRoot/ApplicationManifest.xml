@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="MichalBialecki.com.SF.PriceComparerType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="MichalBialecki.com.SF.PriceComparer" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
+    <Parameter Name="InstanceCount" DefaultValue="1" />
+    <Parameter Name="ASPNETCORE_ENVIRONMENT" DefaultValue="Development" />
     <Parameter Name="ProductActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="ProductActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="ProductActorService_TargetReplicaSetSize" DefaultValue="3" />
@@ -14,7 +16,19 @@
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="PriceComparerPkg" ServiceManifestVersion="1.0.0" />
   </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="PriceComparer.ApiPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+    <EnvironmentOverrides CodePackageRef="code">
+      <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="[ASPNETCORE_ENVIRONMENT]" />
+    </EnvironmentOverrides>
+  </ServiceManifestImport>
   <DefaultServices>
+    <Service Name="PriceComparer.Api">
+      <StatelessService ServiceTypeName="PriceComparer.Api" InstanceCount="[InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
     <Service Name="ProductActorService" GeneratedIdRef="68f5e9e7-5ed0-4496-b33e-a1ab674ad51e|Persisted">
       <StatefulService ServiceTypeName="ProductActorServiceType" TargetReplicaSetSize="[ProductActorService_TargetReplicaSetSize]" MinReplicaSetSize="[ProductActorService_MinReplicaSetSize]">
         <UniformInt64Partition PartitionCount="[ProductActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
