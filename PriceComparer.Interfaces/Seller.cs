@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PriceComparer.Interfaces
 {
@@ -17,7 +18,7 @@ namespace PriceComparer.Interfaces
 
         public decimal MarksSum { get; set; }
 
-        public decimal Rating => MarksSum / MarksCount;
+        public decimal Rating => Math.Round(MarksSum / (MarksCount == 0 ? 1 : MarksCount), 2);
 
         public List<Offer> Offers { get; set; }
     }

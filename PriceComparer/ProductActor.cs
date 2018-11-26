@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Actors;
@@ -17,7 +18,12 @@ namespace PriceComparer
         {
         }
 
-        public async Task ResetAsync(Product product, CancellationToken cancellationToken)
+        public async Task<Product> GetState(CancellationToken cancellationToken)
+        {
+            return await StateManager.GetOrAddStateAsync(StateName, new Product(), cancellationToken);
+        }
+
+        public async Task Reset(Product product, CancellationToken cancellationToken)
         {
             await StateManager.AddOrUpdateStateAsync(StateName, product, (key, value) => value, cancellationToken);
         }

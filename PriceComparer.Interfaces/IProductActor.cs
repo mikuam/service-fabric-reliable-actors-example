@@ -9,7 +9,9 @@ namespace PriceComparer.Interfaces
 {
     public interface IProductActor : IActor
     {
-        Task ResetAsync(Product product, CancellationToken cancellationToken);
+        Task<Product> GetState(CancellationToken cancellationToken);
+
+        Task Reset(Product product, CancellationToken cancellationToken);
 
         Task UpdateSellerOffer(SellerOffer offer, CancellationToken cancellationToken);
 
