@@ -10,7 +10,7 @@ namespace PriceComparer.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductController : ControllerBase
     {
         [HttpGet("{id}")]
         public async Task<ActionResult<string>> Get(string id)
