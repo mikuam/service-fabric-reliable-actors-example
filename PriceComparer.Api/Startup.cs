@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using PriceComparer.Interfaces;
 
 namespace PriceComparer.Api
 {
@@ -35,11 +34,6 @@ namespace PriceComparer.Api
             {
                 p.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "PriceComparer.Api", Version = "v1" });
             });
-
-            /*
-            services.AddScoped<IProductActor, ProductActor>();
-            services.AddScoped<ISellerActor, SellerActor>();
-            */
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
